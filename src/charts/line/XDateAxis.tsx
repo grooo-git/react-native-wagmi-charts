@@ -26,7 +26,6 @@ export const XDateAxis = ({
   let dates = [];
 
   for (let x = 0; x < tickNum - 1; x++) {
-    console.log(x, spacing, data.length);
     dates.push(
       formatDatetime({
         value: data[x * spacing].timestamp,
