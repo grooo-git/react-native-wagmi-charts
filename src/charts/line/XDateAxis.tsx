@@ -1,7 +1,5 @@
 import React from 'react';
 import { Text, TextStyle, View, ViewStyle } from 'react-native';
-
-import type { TFormatterFn } from '../candle/types';
 import { useLineChart } from './useLineChart';
 import { formatDatetime } from '../../utils';
 
