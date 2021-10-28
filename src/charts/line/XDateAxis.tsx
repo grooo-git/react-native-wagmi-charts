@@ -1,17 +1,24 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextStyle, View, ViewStyle } from 'react-native';
 
 import type { TFormatterFn } from '../candle/types';
 import { useLineChart } from './useLineChart';
 import { formatDatetime } from '../../utils';
 
 export const XDateAxis = ({
+  viewStyle = {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textStyle,
   tickNum,
   locale,
   options,
 }: {
+  viewStyle: ViewStyle;
+  textStyle: TextStyle;
   tickNum: number;
-  format?: TFormatterFn<number>;
   locale?: string;
   options?: Intl.DateTimeFormatOptions;
 }) => {
@@ -39,15 +46,13 @@ export const XDateAxis = ({
   );
 
   return (
-    <View
-      style={{
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-      }}
-    >
+    <View style={viewStyle}>
       {dates.map((date, i) => {
-        return <Text key={i}>{date}</Text>;
+        return (
+          <Text key={i} style={textStyle}>
+            {date}
+          </Text>
+        );
       })}
     </View>
   );
