@@ -9,6 +9,7 @@ import { LineChartHorizontalLine } from './HorizontalLine';
 import { LineChartTooltip } from './Tooltip';
 import { LineChartPriceText } from './PriceText';
 import { XDateAxis } from './XDateAxis';
+import { LossRecolor } from './LossRecolor';
 import { LineChartDatetimeText } from './DatetimeText';
 import { useLineChartDatetime } from './useDatetime';
 import { useLineChartPrice } from './usePrice';
@@ -26,6 +27,7 @@ export * from './DatetimeText';
 export * from './Path';
 export * from './PriceText';
 export * from './XDateAxis';
+export * from './LossRecolor';
 export * from './useDatetime';
 export * from './useLineChart';
 export * from './usePrice';
@@ -43,6 +45,7 @@ export const LineChart = Object.assign(_LineChart, {
   Provider: LineChartProvider,
   PriceText: LineChartPriceText,
   XDateAxis: XDateAxis,
+  LossRecolor: LossRecolor,
   DatetimeText: LineChartDatetimeText,
   useDatetime: useLineChartDatetime,
   usePrice: useLineChartPrice,
