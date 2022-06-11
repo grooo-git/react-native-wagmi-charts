@@ -16,6 +16,7 @@ import { useLineChart } from './useLineChart';
 const BACKGROUND_COMPONENTS = [
   'LineChartHighlight',
   'LineChartHorizontalLine',
+  'LineChartVerticalLine',
   'LineChartGradient',
   'LineChartDot',
 ];
