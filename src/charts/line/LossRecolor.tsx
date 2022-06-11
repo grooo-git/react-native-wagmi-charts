@@ -1,27 +1,27 @@
-import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Defs, Svg, Rect, ClipPath } from 'react-native-svg';
-import Animated, {
-  useAnimatedProps,
-  withTiming,
-} from 'react-native-reanimated';
-
 import { LineChartDimensionsContext } from './Chart';
 import { LineChartPath, LineChartPathProps } from './Path';
 import { useLineChart } from './useLineChart';
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Animated, {
+  useAnimatedProps,
+  withTiming,
+  WithTimingConfig,
+} from 'react-native-reanimated';
 import { getYForX, parse } from 'react-native-redash';
+import { Defs, Svg, Rect, ClipPath } from 'react-native-svg';
 
 const AnimatedSVG = Animated.createAnimatedComponent(Svg);
 
 type LineChartPathWrapperProps = {
   animationDuration?: number;
-  animationProps?: Partial<Animated.WithTimingConfig>;
+  animationProps?: Partial<WithTimingConfig>;
   children?: React.ReactNode;
   color?: string;
   width?: number;
   at?: number;
   pathProps?: Partial<LineChartPathProps>;
-  showInactivePath?: boolean;
+  endPoint?: number;
 };
 
 export function LossRecolor({
@@ -31,6 +31,7 @@ export function LossRecolor({
   width: pathWidth = 3,
   at = 0,
   pathProps = {},
+  endPoint,
 }: LineChartPathWrapperProps) {
   const { width, height, path } = React.useContext(LineChartDimensionsContext);
   const { currentX, isActive, data } = useLineChart();
@@ -53,6 +54,9 @@ export function LossRecolor({
   );
   const Y = getYForX(parsedPath, pointWidth * at);
 
+  // The point of this is to cut off the color override at a certain point
+  // Otherwise we can't use LineChart.Highlight
+  const rectWidth = endPoint ? endPoint * pointWidth : undefined;
   ////////////////////////////////////////////////
   return (
     <View style={StyleSheet.absoluteFill}>
@@ -65,7 +69,7 @@ export function LossRecolor({
         />
         <Defs>
           <ClipPath id="clip-path-clip">
-            <Rect x="0" y={Y!} width="100%" height="100%" />
+            <Rect x="0" y={Y!} width={rectWidth ?? '100%'} height="100%" />
           </ClipPath>
         </Defs>
       </AnimatedSVG>

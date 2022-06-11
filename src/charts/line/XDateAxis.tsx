@@ -14,7 +14,7 @@ export const XDateAxis = ({
   locale,
   options,
 }: {
-  viewStyle: ViewStyle;
+  viewStyle?: ViewStyle;
   textStyle: TextStyle;
   tickNum: number;
   locale?: string;
